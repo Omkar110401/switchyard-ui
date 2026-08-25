@@ -1,0 +1,10 @@
+services:
+  ui:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "4200:4200"
+    command: sh -c "npm install && npx ng serve --host 0.0.0.0"

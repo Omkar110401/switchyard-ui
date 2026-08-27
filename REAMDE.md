@@ -53,4 +53,4 @@ switchyard-ui/
 
 ## Related Repo
 
-Backend: [switchyard-service](https://github.com/<you>/switchyard-service) — must be running (via its own `docker-compose up`) for this UI to function beyond static routing.
+Backend: [switchyard-service](https://github.com/Omkar110401/switchyard-service) — must be running (via its own `docker-compose up`) for this UI to function beyond static routing.

@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="navbar">
+  <span class="navbar-title">Switchyard</span>
+  <span class="spacer"></span>
+
+  <div class="user-section" *ngIf="currentUser$ | async as user">
+    <span class="username">{{ user.username }}</span>
+    <button
+      mat-button
+      class="logout-btn"
+      (click)="onLogout()"
+      matTooltip="Logout"
+    >
+      Logout
+    </button>
+  </div>
+</mat-toolbar>

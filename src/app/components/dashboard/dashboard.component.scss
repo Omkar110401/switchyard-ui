@@ -1,0 +1,39 @@
+.dashboard-container {
+  min-height: calc(100vh - 64px);
+  background: linear-gradient(135deg, #fafafa 0%, #dddee0 100%);
+  padding: 40px 24px;
+}
+
+.dashboard-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.1);
+  border: 1px solid rgba(2, 132, 199, 0.05);
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  p {
+    color: #64748b;
+    font-size: 16px;
+    font-weight: 500;
+
+    &.placeholder {
+      color: #94a3b8;
+      margin-top: 32px;
+      font-style: italic;
+      font-size: 15px;
+    }
+  }
+}

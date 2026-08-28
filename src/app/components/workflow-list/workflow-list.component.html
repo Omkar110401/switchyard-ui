@@ -1,0 +1,77 @@
+<div class="workflow-list-container">
+  <!-- Header -->
+  <div class="list-header">
+    <div class="header-content">
+      <h2>Workflows</h2>
+      <p class="subtitle">Monitor and manage your workflow executions</p>
+    </div>
+    <button class="btn-create" (click)="openWorkflowCreate()" title="Create new workflow">
+      <span class="plus-icon">+</span>
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Loading workflows...</p>
+  </div>
+
+  <!-- Error State -->
+  <div class="error-state" *ngIf="error && !loading">
+    <span class="error-icon">⚠</span>
+    <p>{{ error }}</p>
+    <button class="btn-retry" (click)="loadWorkflows()">Retry</button>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!loading && !error && workflows.length === 0">
+    <div class="empty-icon">📊</div>
+    <h3>No workflows yet</h3>
+    <p>Start by creating your first workflow</p>
+  </div>
+
+  <!-- Workflows Table -->
+  <div class="workflows-table" *ngIf="!loading && !error && workflows.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th class="col-name">Workflow Name</th>
+          <th class="col-status">Status</th>
+          <th class="col-progress">Progress</th>
+          <th class="col-created">Created</th>
+          <th class="col-started">Started</th>
+          <th class="col-completed">Completed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let workflow of workflows"
+          class="workflow-row"
+          [routerLink]="['/workflows', workflow.id]"
+        >
+          <td class="col-name">
+            <div class="workflow-name">
+              <span class="version">v{{ workflow.version }}</span>
+              {{ workflow.name }}
+            </div>
+          </td>
+          <td class="col-status">
+            <span class="status-badge" [ngStyle]="{ 'background-color': getStatusColor(workflow.status) }">
+              {{ getStatusLabel(workflow.status) }}
+            </span>
+          </td>
+          <td class="col-progress">
+            <span class="progress-text">{{ workflow.progress }}</span>
+          </td>
+          <td class="col-created">{{ formatDate(workflow.created_at) }}</td>
+          <td class="col-started">
+            {{ workflow.started_at ? formatDate(workflow.started_at) : '-' }}
+          </td>
+          <td class="col-completed">
+            {{ workflow.completed_at ? formatDate(workflow.completed_at) : '-' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

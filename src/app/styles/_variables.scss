@@ -1,0 +1,492 @@
+// ============================================================================
+// DESIGN TOKENS - Shared Variables
+// ============================================================================
+
+// Colors - Primary Palette
+$primary-blue: #0284c7;
+$primary-dark-blue: #0369a1;
+$primary-light-blue: #0c4a6e;
+$primary-very-light-blue: #f0f9ff;
+
+// Colors - Neutral
+$bg-white: #ffffff;
+$bg-light: #f8fafc;
+$bg-lighter: #f1f5f9;
+$bg-lightest: #fafafa;
+
+$text-primary: #0f172a;
+$text-secondary: #334155;
+$text-tertiary: #64748b;
+$text-muted: #94a3b8;
+
+$border-light: #e2e8f0;
+$border-lighter: #f0f0f0;
+
+// Colors - Status
+$color-success: #10b981;
+$color-success-light: #d1fae5;
+$color-success-dark: #15803d;
+
+$color-warning: #f59e0b;
+$color-warning-light: #fef3c7;
+$color-warning-dark: #b45309;
+
+$color-error: #ef4444;
+$color-error-light: #fee2e2;
+$color-error-dark: #991b1b;
+
+$color-info: #3b82f6;
+$color-info-light: #dbeafe;
+$color-info-dark: #0369a1;
+
+// Status Colors for Workflow States
+$status-pending: #94a3b8;
+$status-ready: #3b82f6;
+$status-running: #06b6d4;
+$status-succeeded: #10b981;
+$status-failed: #ef4444;
+$status-retrying: #f59e0b;
+
+// Typography - Font Family
+$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+
+// Typography - Font Sizes
+$font-size-xs: 12px;
+$font-size-sm: 13px;
+$font-size-base: 14px;
+$font-size-md: 15px;
+$font-size-lg: 16px;
+$font-size-xl: 18px;
+$font-size-2xl: 20px;
+$font-size-3xl: 22px;
+$font-size-4xl: 28px;
+$font-size-5xl: 32px;
+$font-size-6xl: 36px;
+
+// Typography - Font Weights
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Typography - Line Heights
+$line-height-tight: 1.2;
+$line-height-normal: 1.4;
+$line-height-relaxed: 1.6;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 24px;
+$spacing-2xl: 32px;
+$spacing-3xl: 40px;
+$spacing-4xl: 48px;
+
+// Border Radius
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+
+// Box Shadows
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+$shadow-lg: 0 10px 30px rgba(2, 132, 199, 0.1);
+$shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+// ============================================================================
+// GLOBAL STYLES
+// ============================================================================
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: $font-family-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: $bg-white;
+  color: $text-primary;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// ============================================================================
+// TYPOGRAPHY
+// ============================================================================
+
+h1 {
+  margin: 0 0 $spacing-sm 0;
+  font-size: $font-size-6xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  margin: 0 0 $spacing-md 0;
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  margin: 0 0 $spacing-md 0;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+}
+
+h4 {
+  margin: 0 0 $spacing-md 0;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+p {
+  margin: 0;
+  font-size: $font-size-base;
+  color: $text-secondary;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-relaxed;
+}
+
+a {
+  color: $primary-blue;
+  text-decoration: none;
+  font-weight: $font-weight-semibold;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $primary-dark-blue;
+    text-decoration: underline;
+  }
+}
+
+// ============================================================================
+// UTILITY CLASSES - Colors & Status
+// ============================================================================
+
+.success {
+  color: $color-success-dark;
+  background-color: $color-success-light;
+  border-color: $color-success;
+
+  &-bg {
+    background-color: $color-success-light;
+  }
+
+  &-text {
+    color: $color-success-dark;
+  }
+
+  &-border {
+    border-color: $color-success;
+  }
+}
+
+.warning {
+  color: $color-warning-dark;
+  background-color: $color-warning-light;
+  border-color: $color-warning;
+
+  &-bg {
+    background-color: $color-warning-light;
+  }
+
+  &-text {
+    color: $color-warning-dark;
+  }
+
+  &-border {
+    border-color: $color-warning;
+  }
+}
+
+.error,
+.fail {
+  color: $color-error-dark;
+  background-color: $color-error-light;
+  border-color: $color-error;
+
+  &-bg {
+    background-color: $color-error-light;
+  }
+
+  &-text {
+    color: $color-error-dark;
+  }
+
+  &-border {
+    border-color: $color-error;
+  }
+}
+
+.info {
+  color: $color-info-dark;
+  background-color: $color-info-light;
+  border-color: $color-info;
+
+  &-bg {
+    background-color: $color-info-light;
+  }
+
+  &-text {
+    color: $color-info-dark;
+  }
+
+  &-border {
+    border-color: $color-info;
+  }
+}
+
+// ============================================================================
+// UTILITY CLASSES - Text & Font
+// ============================================================================
+
+.text-xs {
+  font-size: $font-size-xs;
+}
+
+.text-sm {
+  font-size: $font-size-sm;
+}
+
+.text-base {
+  font-size: $font-size-base;
+}
+
+.text-md {
+  font-size: $font-size-md;
+}
+
+.text-lg {
+  font-size: $font-size-lg;
+}
+
+.text-primary {
+  color: $text-primary;
+}
+
+.text-secondary {
+  color: $text-secondary;
+}
+
+.text-tertiary {
+  color: $text-tertiary;
+}
+
+.text-muted {
+  color: $text-muted;
+}
+
+.font-regular {
+  font-weight: $font-weight-regular;
+}
+
+.font-medium {
+  font-weight: $font-weight-medium;
+}
+
+.font-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+.font-bold {
+  font-weight: $font-weight-bold;
+}
+
+// ============================================================================
+// UTILITY CLASSES - Spacing
+// ============================================================================
+
+.gap-xs {
+  gap: $spacing-xs;
+}
+
+.gap-sm {
+  gap: $spacing-sm;
+}
+
+.gap-md {
+  gap: $spacing-md;
+}
+
+.gap-lg {
+  gap: $spacing-lg;
+}
+
+.gap-xl {
+  gap: $spacing-xl;
+}
+
+// ============================================================================
+// UTILITY CLASSES - Buttons
+// ============================================================================
+
+.btn {
+  padding: $spacing-md $spacing-lg;
+  border: none;
+  border-radius: $radius-sm;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  &-primary {
+    background: linear-gradient(135deg, $primary-blue 0%, $primary-dark-blue 100%);
+    color: $bg-white;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.4);
+    }
+  }
+
+  &-secondary {
+    background: $bg-lighter;
+    color: $text-primary;
+    border: 1px solid $border-light;
+
+    &:hover:not(:disabled) {
+      background: $bg-light;
+      border-color: $primary-blue;
+    }
+  }
+
+  &-success {
+    background: $color-success;
+    color: $bg-white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+    }
+  }
+
+  &-warning {
+    background: $color-warning;
+    color: $bg-white;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+    }
+  }
+
+  &-error,
+  &-fail {
+    background: $color-error;
+    color: $bg-white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+    }
+  }
+
+  &-sm {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+
+  &-lg {
+    padding: $spacing-lg $spacing-xl;
+    font-size: $font-size-lg;
+  }
+}
+
+// ============================================================================
+// UTILITY CLASSES - Cards & Containers
+// ============================================================================
+
+.card {
+  background: $bg-white;
+  border: 1px solid $border-light;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $primary-blue;
+    box-shadow: $shadow-md;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}
+
+// ============================================================================
+// UTILITY CLASSES - Badges & Status Indicators
+// ============================================================================
+
+.badge {
+  display: inline-block;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+
+  &-success {
+    background: $color-success-light;
+    color: $color-success-dark;
+  }
+
+  &-warning {
+    background: $color-warning-light;
+    color: $color-warning-dark;
+  }
+
+  &-error,
+  &-fail {
+    background: $color-error-light;
+    color: $color-error-dark;
+  }
+
+  &-info {
+    background: $color-info-light;
+    color: $color-info-dark;
+  }
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}

@@ -19,24 +19,17 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    console.log('[AuthService] Starting login for:', username);
     return this.http.post<any>(`${this.apiUrl}/auth/login`, { username, password }).pipe(
-      tap((response: any) => {
-        console.log('[AuthService] Login response:', { access_token: response?.access_token ? '***' : 'missing' });
-      }),
       switchMap((response: any) => {
         const token = response?.access_token || response?.token;
-        console.log('[AuthService] Token extracted:', !!token);
         if (token) {
           this.setToken(token);
           this.isAuthenticatedSubject.next(true);
-          console.log('[AuthService] Token saved, fetching user info...');
           return this.getMe();
         }
         throw new Error('No token received');
       }),
       tap((user) => {
-        console.log('[AuthService] User info received:', user?.username);
         this.currentUser$.next(user);
       })
     );
@@ -45,24 +38,19 @@ export class AuthService {
 
   getMe(): Observable<any> {
     const token = this.getToken();
-    console.log('[AuthService.getMe] Token present:', !!token);
 
     if (token) {
       const headers = new HttpHeaders({
         Authorization: `Bearer ${token}`,
       });
-      console.log('[AuthService.getMe] Sending request with Authorization header');
       return this.http.get(`${this.apiUrl}/auth/me`, { headers });
     }
 
-    console.log('[AuthService.getMe] No token, sending request without auth');
     return this.http.get(`${this.apiUrl}/auth/me`);
   }
 
   setToken(token: string): void {
-    console.log('[AuthService] Setting token in localStorage');
     localStorage.setItem('auth_token', token);
-    console.log('[AuthService] Token verified in localStorage:', !!localStorage.getItem('auth_token'));
   }
 
   getToken(): string | null {

@@ -1,9 +1,26 @@
 .navbar {
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
   background: linear-gradient(90deg, #0284c7 0%, #0369a1 50%, #0c4a6e 100%);
   box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 64px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
 }
 
 .navbar-title {
@@ -11,10 +28,37 @@
   font-weight: 700;
   color: white;
   letter-spacing: -0.5px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
-.spacer {
-  flex: 1 1 auto;
+.nav-links {
+  display: flex;
+  gap: 8px;
+
+  a {
+    padding: 8px 16px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.active {
+      color: white;
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
 }
 
 .user-section {
@@ -24,8 +68,8 @@
 
   .username {
     color: rgba(255, 255, 255, 0.9);
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
     letter-spacing: 0.3px;
   }
 
@@ -34,8 +78,10 @@
     font-size: 14px;
     font-weight: 600;
     padding: 8px 16px;
+    border: none;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.15);
+    cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
@@ -45,6 +91,32 @@
 
     &:active {
       transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-content {
+    padding: 0 16px;
+  }
+
+  .navbar-left {
+    gap: 16px;
+  }
+
+  .navbar-title {
+    font-size: 18px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .user-section {
+    gap: 12px;
+
+    .username {
+      display: none;
     }
   }
 }

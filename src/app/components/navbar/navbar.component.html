@@ -1,16 +1,16 @@
-<mat-toolbar color="primary" class="navbar">
-  <span class="navbar-title">Switchyard</span>
-  <span class="spacer"></span>
+<nav class="navbar">
+  <div class="navbar-content">
+    <div class="navbar-left">
+      <a routerLink="/dashboard" class="navbar-title">⚡ Switchyard</a>
+      <div class="nav-links">
+        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a routerLink="/workflows" routerLinkActive="active">Workflows</a>
+      </div>
+    </div>
 
-  <div class="user-section" *ngIf="currentUser$ | async as user">
-    <span class="username">{{ user.username }}</span>
-    <button
-      mat-button
-      class="logout-btn"
-      (click)="onLogout()"
-      matTooltip="Logout"
-    >
-      Logout
-    </button>
+    <div class="user-section" *ngIf="currentUser$ | async as user">
+      <span class="username">{{ user.username }}</span>
+      <button class="logout-btn" (click)="onLogout()">Logout</button>
+    </div>
   </div>
-</mat-toolbar>
+</nav>

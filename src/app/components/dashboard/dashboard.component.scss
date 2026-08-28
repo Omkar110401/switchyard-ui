@@ -1,39 +1,115 @@
+@use '../../styles/variables' as *;
+
 .dashboard-container {
   min-height: calc(100vh - 64px);
-  background: linear-gradient(135deg, #fafafa 0%, #dddee0 100%);
+  background: $bg-white;
   padding: 40px 24px;
 }
 
 .dashboard-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 48px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.1);
-  border: 1px solid rgba(2, 132, 199, 0.05);
+}
+
+.welcome-section {
+  margin-bottom: 60px;
 
   h1 {
-    font-size: 32px;
+    margin: 0 0 8px 0;
+    font-size: 36px;
     font-weight: 700;
     background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 16px;
     letter-spacing: -0.5px;
   }
 
-  p {
+  .subtitle {
+    margin: 0 0 16px 0;
+    font-size: 14px;
     color: #64748b;
-    font-size: 16px;
     font-weight: 500;
+    letter-spacing: 0.5px;
+  }
 
-    &.placeholder {
-      color: #94a3b8;
-      margin-top: 32px;
-      font-style: italic;
-      font-size: 15px;
+  .user-greeting {
+    margin: 0;
+    font-size: 16px;
+    color: #334155;
+
+    strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+  }
+}
+
+.action-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+
+  .card {
+    padding: 32px 24px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      border-color: #0284c7;
+      box-shadow: 0 12px 24px rgba(2, 132, 199, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      margin: 0 0 12px 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    p {
+      margin: 0 0 20px 0;
+      font-size: 14px;
+      color: #64748b;
+      font-weight: 500;
+      flex-grow: 1;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(2, 132, 199, 0.4);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     }
   }
 }

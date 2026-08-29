@@ -1,0 +1,136 @@
+@use '../../styles/variables' as *;
+
+.dag-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: $bg-white;
+  border-radius: $radius-lg;
+  border: 1px solid $border-light;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+.cy-container {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, $border-light, transparent);
+    pointer-events: none;
+  }
+}
+
+.dag-controls {
+  position: absolute;
+  top: $spacing-lg;
+  right: $spacing-lg;
+  display: flex;
+  gap: $spacing-md;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  padding: $spacing-sm;
+  border-radius: $radius-md;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.control-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid $border-light;
+  background: $bg-white;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-base;
+  color: $text-primary;
+
+  &:hover {
+    background: $primary-blue;
+    color: white;
+    border-color: $primary-blue;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+:host ::ng-deep {
+  // Cytoscape canvas styling
+  canvas {
+    outline: none;
+  }
+
+  // Custom scrollbars for the container
+  .cy-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .cy-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .cy-container::-webkit-scrollbar-thumb {
+    background: $border-light;
+    border-radius: 4px;
+
+    &:hover {
+      background: $text-tertiary;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .dag-container {
+    min-height: 300px;
+  }
+
+  .dag-controls {
+    top: $spacing-md;
+    right: $spacing-md;
+  }
+
+  .control-btn {
+    width: 32px;
+    height: 32px;
+    font-size: $font-size-sm;
+  }
+}
+
+@media (max-width: 768px) {
+  .dag-container {
+    min-height: 250px;
+  }
+
+  .dag-controls {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  .control-btn {
+    width: 28px;
+    height: 28px;
+    font-size: $font-size-xs;
+  }
+}

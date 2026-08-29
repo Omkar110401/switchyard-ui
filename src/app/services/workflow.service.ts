@@ -19,6 +19,7 @@ export interface Task {
   started_at?: string;
   completed_at?: string;
   heartbeat_at?: string;
+  depends_on?: string[];
 }
 
 export interface WorkflowSummary {

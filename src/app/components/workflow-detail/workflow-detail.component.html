@@ -50,6 +50,15 @@
       </div>
     </div>
 
+    <!-- DAG Visualization -->
+    <div class="dag-section">
+      <h2>Workflow Graph</h2>
+      <app-dag-visualization
+        [tasks]="workflow.tasks"
+        (taskSelected)="selectTask($event)">
+      </app-dag-visualization>
+    </div>
+
     <!-- Main Content -->
     <div class="main-content">
       <!-- Tasks List -->

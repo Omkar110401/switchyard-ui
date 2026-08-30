@@ -110,4 +110,9 @@ export class WorkflowService {
       map(response => response.tasks.filter(t => t.workflow_type === workflowType))
     );
   }
+
+  deleteWorkflow(workflowId: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete<any>(`${this.apiUrl}/workflows/${workflowId}`, { headers });
+  }
 }

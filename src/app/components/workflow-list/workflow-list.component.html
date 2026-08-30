@@ -41,6 +41,7 @@
           <th class="col-created">Created</th>
           <th class="col-started">Started</th>
           <th class="col-completed">Completed</th>
+          <th class="col-actions"></th>
         </tr>
       </thead>
       <tbody>
@@ -69,6 +70,15 @@
           </td>
           <td class="col-completed">
             {{ workflow.completed_at ? formatDate(workflow.completed_at) : '-' }}
+          </td>
+          <td class="col-actions">
+            <button
+              mat-icon-button
+              (click)="deleteWorkflow($event, workflow.id, workflow.name)"
+              title="Delete workflow"
+              class="btn-delete">
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
         </tr>
       </tbody>

@@ -2,15 +2,18 @@ import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef } from '@angula
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { Subject, timer } from 'rxjs';
 import { takeUntil, finalize, switchMap } from 'rxjs/operators';
 import { WorkflowService, WorkflowSummary } from '../../services/workflow.service';
 import { WorkflowCreateComponent } from '../workflow-create/workflow-create.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-workflow-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatDialogModule],
+  imports: [CommonModule, RouterModule, MatDialogModule, MatIconModule, MatButtonModule],
   templateUrl: './workflow-list.component.html',
   styleUrl: './workflow-list.component.scss',
 })
@@ -103,6 +106,37 @@ export class WorkflowListComponent implements OnInit, OnDestroy {
       width: '550px',
       maxHeight: '90vh',
       disableClose: false,
+    });
+  }
+
+  deleteWorkflow(event: Event, workflowId: string, workflowName: string) {
+    event.stopPropagation();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '600px',
+      disableClose: true,
+      data: {
+        type: 'delete',
+        title: 'Delete Workflow',
+        message: `Are you sure you want to delete workflow "${workflowName}"? This action cannot be undone.`,
+        confirmAction: { label: 'Delete', color: 'warn' },
+        cancelAction: { label: 'Cancel', color: 'primary' },
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed) => {
+      if (confirmed) {
+        this.workflowService.deleteWorkflow(workflowId).subscribe({
+          next: () => {
+            this.workflows = this.workflows.filter(w => w.id !== workflowId);
+            this.cdr.markForCheck();
+          },
+          error: (error) => {
+            console.error('Failed to delete workflow:', error);
+            this.error = 'Failed to delete workflow. Please try again.';
+            this.cdr.markForCheck();
+          },
+        });
+      }
     });
   }
 }

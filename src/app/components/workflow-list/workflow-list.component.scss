@@ -247,7 +247,7 @@
 }
 
 .col-name {
-  width: 30%;
+  width: 25%;
 }
 
 .col-status {
@@ -270,6 +270,21 @@
   width: 16%;
 }
 
+.col-actions {
+  width: 5%;
+  text-align: center;
+
+  .btn-delete {
+    color: #ef4444;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #fee2e2;
+      transform: scale(1.1);
+    }
+  }
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -286,7 +301,7 @@
   }
 
   .col-name {
-    width: 35%;
+    width: 30%;
   }
 
   .col-status {
@@ -298,11 +313,15 @@
   }
 
   .col-created {
-    width: 35%;
+    width: 30%;
   }
 
   .col-started,
   .col-completed {
     display: none;
+  }
+
+  .col-actions {
+    width: 10%;
   }
 }

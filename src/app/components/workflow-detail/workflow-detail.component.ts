@@ -1,14 +1,15 @@
-import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, finalize } from 'rxjs/operators';
 import { WorkflowService, WorkflowDetail, Task } from '../../services/workflow.service';
+import { DagVisualizationComponent } from '../dag-visualization/dag-visualization.component';
 
 @Component({
   selector: 'app-workflow-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, DagVisualizationComponent],
   templateUrl: './workflow-detail.component.html',
   styleUrl: './workflow-detail.component.scss',
 })

@@ -19,6 +19,7 @@ export interface Task {
   started_at?: string;
   completed_at?: string;
   heartbeat_at?: string;
+  depends_on?: string[];
 }
 
 export interface WorkflowSummary {
@@ -108,5 +109,10 @@ export class WorkflowService {
     return this.getAvailableTasks().pipe(
       map(response => response.tasks.filter(t => t.workflow_type === workflowType))
     );
+  }
+
+  deleteWorkflow(workflowId: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete<any>(`${this.apiUrl}/workflows/${workflowId}`, { headers });
   }
 }

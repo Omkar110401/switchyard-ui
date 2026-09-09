@@ -4,6 +4,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { WorkflowListComponent } from './components/workflow-list/workflow-list.component';
 import { WorkflowDetailComponent } from './components/workflow-detail/workflow-detail.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { AuthGuardService } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -23,6 +24,11 @@ export const routes: Routes = [
   {
     path: 'workflows/:id',
     component: WorkflowDetailComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'analytics',
+    component: AnalyticsComponent,
     canActivate: [AuthGuardService],
   },
   { path: '**', redirectTo: '/dashboard' },

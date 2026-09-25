@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="navbar-content">
+    <div class="navbar-left">
+      <a routerLink="/dashboard" class="navbar-title">⚡ Switchyard</a>
+      <div class="nav-links">
+        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a routerLink="/workflows" routerLinkActive="active">Workflows</a>
+        <a routerLink="/analytics" routerLinkActive="active">Analytics</a>
+      </div>
+    </div>
+
+    <div class="user-section" *ngIf="currentUser$ | async as user">
+      <span class="username">{{ user.username }}</span>
+      <button class="logout-btn" (click)="onLogout()">Logout</button>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,95 @@
+<div class="signup-container">
+  <div class="signup-wrapper">
+    <!-- Branding Section -->
+    <div class="branding-section">
+      <div class="logo-area">
+        <div class="logo">⚡</div>
+        <h1 class="logo-text">Switchyard</h1>
+      </div>
+      <p class="tagline">Workflow Orchestration Platform</p>
+    </div>
+
+    <!-- Signup Card -->
+    <div class="signup-card">
+      <div class="card-header">
+        <h2>Create Account</h2>
+        <p>Join Switchyard today</p>
+      </div>
+
+      <form (ngSubmit)="onSignup()" class="signup-form">
+        <!-- Username Field -->
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <div class="input-wrapper">
+            <input
+              class="form-input"
+              type="text"
+              [(ngModel)]="username"
+              name="username"
+              placeholder="Choose a username"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-wrapper">
+            <input
+              class="form-input"
+              type="password"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="At least 8 characters"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="form-group">
+          <label class="form-label">Confirm Password</label>
+          <div class="input-wrapper">
+            <input
+              class="form-input"
+              type="password"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" *ngIf="errorMessage">
+          <span class="error-icon">⚠</span>
+          {{ errorMessage }}
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message" *ngIf="successMessage">
+          <span class="success-icon">✓</span>
+          {{ successMessage }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-signup" [disabled]="loading">
+          <span *ngIf="!loading" class="btn-text">Create Account</span>
+          <span *ngIf="loading" class="btn-loading">
+            <mat-spinner diameter="16"></mat-spinner>
+          </span>
+        </button>
+      </form>
+
+      <!-- Login Link -->
+      <div class="card-footer">
+        <p class="login-text">
+          Already have an account?
+          <a routerLink="/login" class="login-link">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

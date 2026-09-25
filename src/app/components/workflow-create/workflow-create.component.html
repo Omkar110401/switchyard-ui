@@ -1,0 +1,127 @@
+<div class="workflow-create-dialog">
+  <div class="dialog-header">
+    <h2>Create New Workflow</h2>
+    <p class="subtitle">Build your workflow by adding tasks</p>
+  </div>
+
+  <div class="workflow-form">
+    <!-- Workflow Name -->
+    <div class="form-section">
+      <label class="form-label">Workflow Name *</label>
+      <input
+        type="text"
+        class="form-input"
+        [(ngModel)]="workflowName"
+        placeholder="e.g., my-data-pipeline"
+      />
+    </div>
+
+    <!-- Workflow Type -->
+    <div class="form-section">
+      <label class="form-label">Workflow Type *</label>
+      <select class="form-input" [(ngModel)]="selectedType" (change)="selectWorkflowType(selectedType!)">
+        <option [value]="null">Choose a workflow type...</option>
+        <option *ngFor="let type of workflowTypes" [value]="type">
+          {{ workflowTypeLabels[type] }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Tasks Section -->
+    <div class="form-section" *ngIf="selectedType">
+      <h3 class="section-title">Tasks</h3>
+
+      <div *ngIf="tasksLoading" class="loading-state">
+        <p>Loading available tasks...</p>
+      </div>
+
+      <div *ngIf="!tasksLoading && filteredTasks.length === 0" class="empty-state">
+        <p>No tasks available for {{ workflowTypeLabels[selectedType!] }}</p>
+      </div>
+
+      <div *ngIf="!tasksLoading && filteredTasks.length > 0" class="tasks-list">
+        <!-- Task Blocks -->
+        <div *ngFor="let task of selectedTasks; let i = index" class="task-block">
+          <div class="task-block-header">
+            <h4>Task {{ i + 1 }}</h4>
+            <button
+              type="button"
+              class="btn-remove-task"
+              (click)="removeTask(task.name)"
+              title="Remove task"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div class="task-block-content">
+            <div class="form-group">
+              <label class="form-label">Task Command *</label>
+              <select class="form-input" (change)="updateTask(i, $event)">
+                <option *ngFor="let t of filteredTasks"
+                        [value]="t.name"
+                        [selected]="selectedTasks[i].name === t.name"
+                        [disabled]="selectedTasks.some((sel, idx) => idx !== i && sel.name === t.name)">
+                  {{ t.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group" *ngIf="i > 0">
+              <label class="form-label">Depends On</label>
+              <select class="form-input" [(ngModel)]="taskDependencies[i]">
+                <option value="">None (runs in parallel)</option>
+                <option *ngFor="let prevTask of selectedTasks.slice(0, i)"
+                        [value]="prevTask.name">
+                  Task {{ selectedTasks.indexOf(prevTask) + 1 }}: {{ prevTask.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="task-info" *ngIf="task.outputs.length > 0">
+              <p class="info-label">Output:</p>
+              <p class="info-value">{{ task.outputs[0] }}</p>
+            </div>
+          </div>
+
+          <!-- Arrow -->
+          <div *ngIf="i < selectedTasks.length - 1" class="task-arrow-divider">
+            <span class="arrow-line">↓</span>
+          </div>
+        </div>
+
+        <!-- Add Task Button -->
+        <button
+          type="button"
+          class="btn-add-task"
+          (click)="addNewTask()"
+          [disabled]="selectedTasks.length >= filteredTasks.length"
+        >
+          + Add Another Task
+        </button>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" *ngIf="errorMessage">
+      <span class="error-icon">⚠</span>
+      {{ errorMessage }}
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="dialog-actions">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()" [disabled]="loading">
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onSubmit()"
+        [disabled]="loading || selectedTasks.length === 0"
+      >
+        <span *ngIf="!loading">Create Workflow</span>
+        <span *ngIf="loading" class="btn-loading">Creating...</span>
+      </button>
+    </div>
+  </div>
+</div>

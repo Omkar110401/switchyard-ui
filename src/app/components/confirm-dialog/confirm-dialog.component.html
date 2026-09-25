@@ -1,0 +1,29 @@
+<div class="confirm-dialog">
+  <h2 mat-dialog-title class="dialog-title" [class]="'title-' + data.type">
+    {{ data.title }}
+  </h2>
+
+  <div mat-dialog-content class="dialog-content">
+    <p>{{ data.message }}</p>
+  </div>
+
+  <div mat-dialog-actions class="dialog-actions" *ngIf="data.showActions">
+    <button
+      *ngIf="data.cancelAction"
+      mat-button
+      (click)="onCancel()"
+      class="btn-cancel">
+      {{ data.cancelAction.label }}
+    </button>
+
+    <button
+      *ngIf="data.confirmAction"
+      mat-raised-button
+      (click)="onConfirm()"
+      [class.btn-danger]="data.type === 'delete' || data.type === 'warning' || data.type === 'error'"
+      [class.btn-success]="data.type === 'success'"
+      [class.btn-primary]="!(data.type === 'delete' || data.type === 'warning' || data.type === 'error' || data.type === 'success')">
+      {{ data.confirmAction.label }}
+    </button>
+  </div>
+</div>

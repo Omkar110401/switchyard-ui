@@ -1,0 +1,40 @@
+@use 'app/styles/variables' as *;
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Custom Blue/Azure theme for Material Components */
+::ng-deep {
+  /* Primary Colors */
+  .mat-mdc-button.mat-primary,
+  .mat-mdc-raised-button.mat-primary,
+  .mat-mdc-fab.mat-primary,
+  .mat-mdc-mini-fab.mat-primary {
+    background-color: #0284c7 !important;
+    color: white !important;
+  }
+
+  /* Text Fields */
+  .mdc-text-field--filled {
+    background-color: #f1f5f9 !important;
+  }
+
+  .mdc-text-field--filled:hover {
+    background-color: #e2e8f0 !important;
+  }
+
+  /* Labels */
+  .mat-mdc-form-field-focus-overlay {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    opacity: 0.05 !important;
+  }
+
+  /* Toolbars */
+  .mat-toolbar.mat-primary {
+    background: linear-gradient(90deg, #0284c7 0%, #0369a1 50%, #0c4a6e 100%) !important;
+    color: white !important;
+  }
+
+  /* Cards */
+  .mat-mdc-card {
+    box-shadow: 0 4px 6px rgba(2, 132, 199, 0.1) !important;
+  }
+}
